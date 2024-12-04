@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Copilot Landing Page</title>
+    <style>
+        /* Import the General Sans font */
+        @font-face {
+            font-family: 'General Sans';
+            src: url('fonts/GeneralSans-Regular.woff2') format('woff2'),
+                 url('fonts/GeneralSans-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'General Sans';
+            src: url('fonts/GeneralSans-Bold.woff2') format('woff2'),
+                 url('fonts/GeneralSans-Bold.woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+    margin: 0;
+    font-family: 'General Sans', Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px; /* Ensure space from top */
+}
+
+        .subheading {
+            font-size: 24px;
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+            max-width: 1000px;
+            margin-left: 150px;
+            margin-right: 150px;
+            text-align: center;
+        }
+        .carousel-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+        }
+
+        .heading {
+            font-size: 48px;
+            color: black;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .embossed-text-two {
+
+          font-size: 48px;
+          color: black;
+          font-weight: bold;
+          margin: 0;
+            color: #333; /* Slightly darker color for contrast */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+
+            /* Create the embossed effect */
+            text-shadow:
+                1px 1px 2px rgba(255, 255, 255, 0.9), /* Top-left lighter shadow */
+                -1px -1px 2px rgba(0, 0, 0, 0.2); /* Bottom-right darker shadow */
+        }
+
+        .placeholder-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for responsive design */
+            gap: 20px; /* Add spacing between images */
+            justify-content: center; /* Center images in the container */
+            padding: 20px; /* Add some padding */
+        }
+
+        .placeholder-box {
+            width: 300px;
+            height: 225px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .placeholder-box img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 12px;
+        }
+
+/* Adjusted scrolling animation to account for spacing */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% - 20px)); /* Includes spacing */
+    }
+}
+        /* Gradient overlay for blur effect on edges */
+        .blur-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 10%;
+            pointer-events: none;
+            background: linear-gradient(to right, rgba(244, 244, 244, 1), rgba(244, 244, 244, 0));
+        }
+        .blur-overlay.left {
+            left: 0;
+        }
+        .blur-overlay.right {
+            right: 0;
+            transform: rotate(180deg);
+        }
+        /* Video frame styling */
+        .video-frame {
+            width: 80%;
+            max-width: 800px;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Center-aligned card container styling */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+        }
+
+        /* Individual card styling */
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            margin-top: 30px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.1); /* Increase size */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow */
+        }
+
+        .icon-placeholder {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            background: linear-gradient(45deg, #f5f5f5 25%, #e0e0e0 25%, #e0e0e0 50%, #f5f5f5 50%, #f5f5f5 75%, #e0e0e0 75%, #e0e0e0);
+            background-size: 20px 20px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #777;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 400px;
+            width: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .form-container h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-container p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .form-group input::placeholder,
+        .form-group select {
+            color: #bfbfbf;
+        }
+
+        .submit-btn {
+            background-color: #c6ff00;
+            color: #333;
+            font-size: 14px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #b3e600;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer .social {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 300px;
+            margin: 0 auto;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .footer p {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        /* Hovering bar styling */
+        .hovering-bar {
+            position: relative;
+            margin: 20px auto; /* Adjust margins for more space */
+            width: 80%; /* Adjust width as needed */
+            max-width: 600px; /* Limit maximum width */
+            background-color: rgba(255, 255, 255, 0.7); /* Slightly more opaque semi-transparent background */
+            backdrop-filter: blur(15px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(15px); /* Support for Safari */
+            border: 1px solid rgba(255, 255, 255, 0.4); /* Enhanced border for definition */
+            padding: 15px 25px; /* More padding for a raised appearance */
+            border-radius: 15px; /* Slightly larger rounded corners */
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            text-align: center; /* Center the text inside the bar */
+            font-size: 16px; /* Slightly larger font size */
+            font-weight: bold; /* Make text bold */
+            color: #333; /* Darker text for better contrast */
+            z-index: 1; /* Ensure it stays above other elements */
+        }
+
+        .heading-wrapper {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+        }
+
+        .heading-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -5px;
+            right: -5px;
+            z-index: -1;
+           /* Green background for "Meet Eliza" */
+        }
+
+        .placeholder-wrapper {
+            display: flex;
+            width: calc(2 * 100vw); /* Ensure two sets of logos fit within the viewport */
+        }
+
+        .embossed-text {
+
+            font-weight: bold;
+            color: #333; /* Slightly darker color for contrast */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+
+            /* Create the embossed effect */
+            text-shadow:
+                1px 1px 2px rgba(255, 255, 255, 0.9), /* Top-left lighter shadow */
+                -1px -1px 2px rgba(0, 0, 0, 0.2); /* Bottom-right darker shadow */
+        }
+
+        .embossed-text-small {
+
+            font-weight: bold;
+            color: #333; /* Slightly darker color for contrast */
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+
+            /* Create the embossed effect */
+            text-shadow:
+                1px 1px 2px rgba(255, 255, 255, 0.9), /* Top-left lighter shadow */
+                -1px -1px 2px rgba(0, 0, 0, 0.2); /* Bottom-right darker shadow */
+        }
+
+        .scroll-down {
+    position: relative;
+    margin-top: 40px; /* Adjust spacing as needed */
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    animation: fadeInOut 2s infinite; /* Subtle fade effect */
+}
+
+.scroll-down::after {
+    content: "↓";
+    display: block;
+    font-size: 24px;
+    margin-top: 5px;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+html {
+    font-size: 112.5%; /* Sets base font size to 18px (16px * 1.125) */
+}
+
+body {
+    line-height: 1.6; /* Maintain readability with increased spacing */
+}
+
+.subheading {
+    font-size: 1.5rem; /* 27px with the new base font size */
+}
+
+.description {
+    font-size: 1.25rem; /* 22.5px with the new base font size */
+}
+
+.heading {
+    font-size: 3rem; /* 54px with the new base font size */
+}
+
+.embossed-text {
+    font-size: 2.5rem; /* Adjust proportionally */
+}
+
+.embossed-text-small {
+    font-size: 1.25rem;
+}
+
+
+    </style>
+
+
+</head>
+<body>
+    <!-- First Section -->
+    <section>
+      <div class="carousel-wrapper">
+          <div class="container" style="margin-top: -50px;"> <!-- Adjust margin-top -->
+              <div class="heading-wrapper" style="font-size: 40px;">
+                  <div class="heading embossed-text" style="color: #ffffff; background-color: #1E0633; font-size: 90px;">
+                      <!-- &nbsp;Meet Eliza&nbsp; -->
+                      &nbsp;<img src="logos/eliza_logo_cropped.svg" alt="Valorant Logo" width="300" />&nbsp;
+                  </div>
+              </div>
+          </div>
+
+
+
+            <div class="container" style="margin-top: 40px;">
+                <div class="heading-wrapper">
+                    <div class="heading" style="font-size: 30px; background-color: #1E0633;color: #ffffff">&nbsp;&nbsp;Your Ultimate Gaming Copilot&nbsp;&nbsp;</div>
+                </div>
+            </div>
+
+            <p class="description" style="font-size: 20px; margin-top: 20px;">
+                Have Eliza be your gaming companion. Ask for clues, tips, hints, strategy or any possible query you may have of the gameplay you're playing, all at your fingertips.
+            </p>
+
+              <div class="placeholder-container">
+                <div class="placeholder-box"><img src="logos/valorant.png" alt="Valorant Logo"></div>
+                  <div class="placeholder-box"><img src="logos/witcher3.png" alt="Witcher 3 Logo"></div>
+                  <div class="placeholder-box"><img src="logos/portal1.png" alt="Portal Logo"></div>
+                  <div class="placeholder-box"><img src="logos/GoT.png" alt="Portal Logo"></div>
+              </div>
+
+
+            <div class="container">
+                <div class="embossed-text" style="font-size: 120%;">&nbsp;+ Many more joining the fray!&nbsp;</div>
+            </div>
+            <div class="scroll-down">Scroll down to explore</div>
+        </div>
+    </section>
+
+    <!-- Second Section -->
+    <section>
+        <div class="container">
+            <div class="heading" style="background-color: #1E0633;color: #ffffff">&nbsp;Multiplayer&nbsp;</div>
+            <p class="description">
+                Dominate the game with real-time dynamic suggestions as you play with or against others.
+            </p>
+            <!-- Video frame below the 'Multiplayer' section -->
+            <video class="video-frame" controls>
+                <source src="videos/after.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Center-aligned Card container -->
+        <div class="card-container">
+            <div class="card">
+                <img src="images/matches.png" alt="Valorant Pro Matches" style="width: 300px; height: auto;">
+                <h3>Intelligence built with 100s of hours of pro-level as welll as ametuer gameplay</h3>
+                <p>Trained on over 1000 hours of Pro and Competitive match videos across multiplayer games like Valorant, helping you be like the Pros yourself.</p>
+            </div>
+            <div class="card">
+                <img src="images/88FoLcV.jpg" alt="Witcher 3 cues" style="width: 300px; height: auto;">
+                <h3>Watches you play</h3>
+                <p>Monitors your gameplay and automatically picks up contextual cues from the same to get an understanding of your game, in real time.</p>
+            </div>
+            <div class="card">
+                <img src="images/team.jpeg" alt="Valorant team" style="width: 300px; height: auto;">
+                <h3>A coach for your team</h3>
+                <p>Improve and review your game - whether you're solo or a team. Picks up cues from live gameplay in order to suggest personal as well as team plays.</p>
+            </div>
+        </div>
+    </section>
+</body>
+
+<div class="container">
+    <!-- <div class="heading" style="margin-top: 250px; color: #000;background-color: #c6ff00;"><strike>Single</strike> Player</div> -->
+    <div class="heading" style="margin-top: 250px; color: #000;">
+      <span style="text-decoration: line-through; text-decoration-color: red; text-decoration-thickness: 15%;">Single</span>
+    <span style="background-color: #1E0633;color: #ffffff">&nbsp;Player&nbsp;</span>
+</div>
+    <p class="description">
+        Never play alone again. Eliza will always wait for your command, ready to let you know where to go, how to solve and what to do. Its the know-it-all game companion you never had.
+    </p>
+    <!-- Video frame below the 'Multiplayer' section -->
+    <video class="video-frame" controls>
+        <source src="videos/eliza_demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<!-- Center-aligned Card container -->
+<div class="card-container">
+    <div class="card">
+        <img src="images/portal2.jpg" alt="Portal Puzzle Solving" style="width: 300px; height: auto;">
+        <h3>Your Personal Puzzle Solver</h3>
+        <p>Eliza offers step-by-step guidance to overcome challenging puzzles and levels, helping you navigate even the trickiest of single-player experiences.</p>
+    </div>
+    <div class="card">
+        <img src="images/witcher_secret_treasure.jpg" alt="Item Locations Assistance" style="width: 300px; height: auto;">
+        <h3>Find Every Secret</h3>
+        <p>Locate hidden items, Easter eggs, and collectibles with Eliza’s deep understanding of game worlds, saving you hours of exploration frustration.</p>
+    </div>
+    <div class="card">
+        <img src="images/witcher_boss.jpg" alt="Boss Fight Help" style="width: 300px; height: auto;">
+        <h3>Master Every Boss Fight</h3>
+        <p>Get tailored strategies and tips to defeat tough bosses and progress smoothly, learning techniques that make every encounter manageable.</p>
+    </div>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+
+<!-- Form Section -->
+<div class="form-section" style="al; width: 80%">
+
+
+    <div class="form-container" style="width: 80%; max-width: 1200px; margin: 0 auto;">
+        <h2>Are You Game?</h2>
+        <p>Join the waitlist and be the first to put Eliza</p>
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSdeQQumietfFIT-aVPsMJD7zKGxxFSn8leXyrv7i-ygWsPIvA/formResponse" method="POST" target="_self">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="entry.840518336" placeholder="Enter Name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="device">Device</label>
+        <select name="entry.717832371" required>
+            <option value="" disabled selected>Select Device</option>
+            <option value="PC">PC</option>
+            <option value="Console">Console</option>
+            <option value="Mobile">Mobile</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="entry.882397555" placeholder="user@gmail.com" required>
+    </div>
+
+    <div class="form-group">
+        <label for="current-game">Current Game</label>
+        <input type="text" name="entry.734446697" placeholder="Enter Game" required>
+    </div>
+
+    <div class="form-group">
+        <label for="discord">Discord (ID Optional)</label>
+        <input type="text" name="entry.520227317" placeholder="Example: #1234">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+</form>
+</div>
+
+
+</div>
+
+
+<div class="footer">
+    <div class="social">
+        <span>Logoplaceholder</span>
+        <span>info@eliza.com</span>
+    </div>
+    <p>&copy; 2024 Eliza. All rights reserved.</p>
+</div>
+
+
+</html>
